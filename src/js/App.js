@@ -1,15 +1,10 @@
-
-import React from 'react';
-
+import React from "react";
+import MainMenu from "../views/Main";
 
 export default function App() {
-
   return (
     <>
-      <h1>I am App Component!!!</h1>
-      <button onClick={() => {
-        electron.notificationApi.sendNotification('My custom notification!');
-      }}>Notify</button>
+      <MainMenu></MainMenu>
     </>
-  )
+  );
 }
