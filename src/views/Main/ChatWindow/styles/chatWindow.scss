@@ -1,0 +1,137 @@
+/* ChatWindow.scss */
+
+/* Style for the entire ChatWindow container */
+.chat-window {
+  padding: 5px;
+  //   border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the ChatWindow to take the full height of the screen */
+}
+
+/* Style for the chat header */
+.chat-header {
+  padding: 11px;
+  display: flex;
+  align-items: center;
+  background-color: #f3f2f7;
+  .profile-pic {
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+  }
+  .chat-name {
+    font-weight: bold;
+  }
+}
+
+/* Style for the chat messages container */
+.chat-messages {
+  flex-grow: 1; /* Allow the chat messages area to expand and take remaining height */
+  display: flex;
+  flex-direction: column-reverse; /* Reverse the direction to start from the bottom */
+  overflow-y: auto; /* Enable vertical scrolling */
+  //   border: 1px solid red;
+}
+
+/* Style for individual chat messages */
+.message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  color: white;
+
+  .message-sender {
+    font-weight: bold;
+  }
+
+  .message-text {
+    margin-top: 8px;
+  }
+
+  .message-timestamp {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #b0b0b0;
+  }
+}
+
+/* Style for the message input section */
+.message-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: 16px;
+  }
+}
+
+/* Style for the pen icon */
+// .pen-icon {
+//   cursor: pointer;
+//   img {
+//     width: 24px;
+//     height: 24px;
+//   }
+// }
+/* Style for sent messages (your messages) */
+.sent-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 8px 0;
+}
+
+.sent-message .message-sender {
+  display: none; /* Hide sender's name for your messages */
+}
+
+.sent-message .message-text {
+  background-color: #0070ee; /* Background color for your messages */
+  color: white; /* Text color for your messages */
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 70%; /* Adjust as needed */
+  word-wrap: break-word;
+}
+
+.sent-message .message-timestamp {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Style for received messages (sender's messages) */
+.received-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 8px 0;
+}
+
+.received-message .message-sender {
+  font-weight: bold; /* Display sender's name in bold for received messages */
+  margin-bottom: 4px;
+}
+
+.received-message .message-text {
+  background-color: #f3f3f3; /* Background color for received messages */
+  color: #333; /* Text color for received messages */
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 70%; /* Adjust as needed */
+  word-wrap: break-word;
+}
+
+.received-message .message-timestamp {
+  font-size: 12px;
+  color: #888;
+}

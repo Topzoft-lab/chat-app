@@ -1,16 +1,7 @@
+const { ipcRenderer, contextBridge } = require("electron");
 
-const { ipcRenderer, contextBridge } = require('electron');
-
-contextBridge.exposeInMainWorld('electron', {
-  notificationApi: {
-    sendNotification(message) {
-      ipcRenderer.send('notify', message);
-    }
-  },
-  batteryApi: {
-
-  },
-  filesApi: {
-
-  }
-})
+contextBridge.exposeInMainWorld("api", {
+  signup: (arg) => ipcRenderer.invoke("setUserProfile", arg),
+  compareCode: (arg = "") => ipcRenderer.invoke("compareCode", arg),
+  getConversation: (arg = "") => ipcRenderer.invoke("getConversation", arg),
+});

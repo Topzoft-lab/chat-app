@@ -1,23 +1,20 @@
 /* Create a flex container to arrange Sidebar and ChatWindow side by side */
 .main-menu {
   display: flex;
-  height: 100%;
-  border: 1px solid #ccc;
+  height: 100vh;
+  //   border: 1px solid #080808;
 }
 
 /* Style for the Sidebar on the left */
-.sidebar {
+.sidebar-container {
   flex: 1;
-  padding: 16px;
-  background-color: #f0f0f0;
-  border-right: 1px solid #ccc;
-  overflow-y: auto;
+  background-color: #f3f2f7;
 }
 
 /* Style for the ChatWindow on the right */
-.chat-window {
+.chat-window-container {
   flex: 2;
-  padding: 16px;
-  background-color: #ffffff;
+  //   padding: 16px;
+  //   background-color: #ffffff;
   overflow-y: auto;
 }

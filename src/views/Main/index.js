@@ -6,10 +6,10 @@ import "./main.scss"; // Import your SCSS file
 const MainMenu = () => {
   return (
     <div className="main-menu">
-      <div className="sidebar">
+      <div className="sidebar-container">
         <Sidebar />
       </div>
-      <div className="chat-window">
+      <div className="chat-window-container">
         <ChatWindow />
       </div>
     </div>
