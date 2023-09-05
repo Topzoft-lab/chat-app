@@ -35,10 +35,36 @@ const compareCode = (code) => {
 const generateUserConversation = () => {
   // Generate a UUID
   const uuid = uuidv4();
-  store.set("conversations", [{ id: uuid, name: "Darryl", photo_id: 1, conversations: [] }]);
+  store.set("conversations", [{ id: uuid, name: "Darryl", photo_id: 1, lastMessage: "", lastSeen: formatAMPM(new Date()), conversations: [] }]);
+};
+
+const saveMessage = (id, message) => {
+  const conversations = store.get("conversations");
+  let conv = conversations.find((con) => con.id === id);
+  if (message.sender !== "you") {
+    conv.lastMessage = message.text;
+    conv.lastSeen = formatAMPM(new Date());
+  }
+  conv.conversations.push(message);
+  console.log({ conv });
+  store.set("conversations", conversations);
+  return conversations;
 };
 
 const getConversation = () => {
   return store.get("conversations");
 };
-module.exports = { setStore, compareCode, getConversation };
+
+const formatAMPM = (date) => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12 || 12; // Convert to 12-hour format
+
+  // Ensure leading zeros for single-digit minutes
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${hours}:${minutes} ${ampm}`;
+};
+module.exports = { setStore, compareCode, getConversation, saveMessage };

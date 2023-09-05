@@ -8,6 +8,8 @@ export const useDataContext = () => useContext(DataContext);
 const DataProvider = ({ children }) => {
   const [isSignup, setSignUp] = useState(false);
   const [isLogin, setLogin] = useState(false);
+  const [chatLists, setChatList] = useState(false);
+  const [isMessageSent, setIsMessageSent] = useState(false);
 
   //   // Example: Using useHistory for navigation
   const navigate = useNavigate();
@@ -25,13 +27,41 @@ const DataProvider = ({ children }) => {
       if (isLogin) {
         let result = await window.api.getConversation();
         console.log(result);
+        setChatList(result);
         navigate("/main");
       }
     };
     fetchData();
   }, [isLogin]);
 
-  const value = { isSignup, isLogin, setSignUp, setLogin };
+  React.useEffect(() => {
+    const fetchData = async () => {
+      if (isMessageSent) {
+        let result = await window.api.getConversation();
+        console.log(result, "newData");
+        setChatList(result);
+        // navigate("/main");
+      }
+    };
+    fetchData();
+  }, [isMessageSent]);
+
+  React.useEffect(() => {}, []);
+
+  const sendMessage = async (text) => {
+    console.log("here now, hit", chatLists);
+    let length = chatLists.length > 0 ? chatLists[0].conversations.length : 0;
+    let lastMessage = length > 0 ? chatLists[0].conversations[length - 1] : "";
+    console.log("here now, hit, lastmessage", lastMessage);
+    const newMessage = { id: chatLists[0].conversations.length + 1, text, sender: lastMessage.sender === "you" ? chatLists[0].name : "you" };
+    console.log("here now, hit newMessage", newMessage);
+    let result = await window.api.saveMessage({ newMessage, id: chatLists[0].id });
+    // console.log(result, "now here");
+    setIsMessageSent(true);
+    setChatList(result);
+  };
+
+  const value = { isSignup, isLogin, setSignUp, setLogin, sendMessage, chatLists };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

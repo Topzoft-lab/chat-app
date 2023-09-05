@@ -1,4 +1,4 @@
-const { setStore, compareCode, getConversation } = require("./operations");
+const { setStore, compareCode, getConversation, saveMessage } = require("./operations");
 const { ipcMain } = require("electron");
 
 //ipc Connections
@@ -13,4 +13,9 @@ ipcMain.handle("compareCode", (event, args) => {
 
 ipcMain.handle("getConversation", (event, args) => {
   return getConversation();
+});
+// saveMessage
+ipcMain.handle("saveMessage", (event, args) => {
+  const { id, newMessage } = args;
+  return saveMessage(id, newMessage);
 });
