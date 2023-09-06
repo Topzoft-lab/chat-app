@@ -6,11 +6,13 @@ export const ChatList = () => {
   const [chats, setChats] = useState([]);
   useEffect(() => {
     setChats(chatLists);
+    setSelectedChatId(chatLists[0].id);
     console.log("no conditiono", chatLists);
   }, []);
 
   useEffect(() => {
     setChats(chatLists);
+    setSelectedChatId(chatLists[0].id);
     console.log("yes conditiono", chatLists);
   }, [chatLists]);
   // Initialize selectedChatId with the ID of the first chat item (1 in this case)

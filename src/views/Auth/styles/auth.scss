@@ -69,6 +69,11 @@ input[type="text"]:focus {
 }
 
 .submit-button:hover {
+  cursor: pointer;
+}
+.submit-button:not(:disabled):hover {
+  /* Your hover effect here */
+  /* Your hover effect here */
   background-color: white; /* Change the background color to white */
   color: black; /* Change the text color to black */
   box-shadow: inset 0 0 10px #000; /* Add an inset shadow to create a pressed effect */
