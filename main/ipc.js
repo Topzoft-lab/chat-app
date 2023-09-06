@@ -3,8 +3,13 @@ const { ipcMain } = require("electron");
 
 //ipc Connections
 ipcMain.handle("setUserProfile", (event, args) => {
-  const { name, lastname } = args;
-  return setStore(name, lastname);
+  // const { name, lastname } = args;
+  return setStore(args, "");
+});
+
+ipcMain.handle("register", (event, args) => {
+  // const { phone } = args;
+  return setStore(args);
 });
 
 ipcMain.handle("compareCode", (event, args) => {

@@ -15,14 +15,14 @@ const SignUp = () => {
       [name]: value,
     });
   };
-  const { setSignUp } = useDataContext();
+  const { setLogin } = useDataContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ ...formData });
+    // console.log({ ...formData });
     let result = await window.api.signup({ ...formData });
-    alert(`copy this ${result} for use later`);
-    setSignUp(true);
+    // alert(`copy this ${result} for use later`);
+    setLogin(true);
   };
 
   return (
@@ -40,7 +40,7 @@ const SignUp = () => {
         </div>
 
         <button type="submit" className="submit-button">
-          Login
+          Next
         </button>
       </form>
     </div>

@@ -2,137 +2,235 @@
 
 /* Style for the entire ChatWindow container */
 .chat-window {
-  padding: 5px;
-  //   border: 1px solid green;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Set the ChatWindow to take the full height of the screen */
-}
+  height: 100%;
 
-/* Style for the chat header */
-.chat-header {
-  padding: 11px;
-  display: flex;
-  align-items: center;
-  background-color: #f3f2f7;
-  .profile-pic {
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 12px;
+  /* Style for the chat header */
+  .chat-header {
+    padding: 11px;
+    display: flex;
+    align-items: center;
+    background-color: #f3f2f7;
+    .profile-pic {
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+      }
+    }
+    .chat-name {
+      font-weight: bold;
     }
   }
-  .chat-name {
-    font-weight: bold;
-  }
-}
 
-/* Style for the chat messages container */
-.chat-messages {
-  flex-grow: 1; /* Allow the chat messages area to expand and take remaining height */
-  display: flex;
-  flex-direction: column-reverse; /* Reverse the direction to start from the bottom */
-  overflow-y: auto; /* Enable vertical scrolling */
-  //   border: 1px solid red;
-}
-
-/* Style for individual chat messages */
-.message {
-  margin-bottom: 16px;
-  padding: 12px;
-  border-radius: 4px;
-  color: white;
-
-  .message-sender {
-    font-weight: bold;
-  }
-
-  .message-text {
-    margin-top: 8px;
-  }
-
-  .message-timestamp {
-    margin-top: 8px;
-    font-size: 12px;
-    color: #b0b0b0;
-  }
-}
-
-/* Style for the message input section */
-.message-input {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-
-  input {
+  .chat-messages-container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 8px;
-    font-size: 16px;
+    overflow-y: auto;
+
+    .chat-messages {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+
+      .message {
+        margin-bottom: 5px;
+        padding: 0 12px;
+        border-radius: 7px;
+        color: black;
+
+        .message-text {
+          margin: 0;
+          text-align: left;
+        }
+
+        .message-timestamp {
+          font-size: 8px;
+          margin: 0;
+          text-align: right;
+        }
+      }
+      .sent-message {
+        display: flex;
+        flex-direction: column;
+        margin: 4px 8px;
+        background-color: #0070ee;
+        max-width: 48%;
+        color: white;
+        align-self: flex-end;
+        word-wrap: break-word;
+
+        ::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          right: -15px;
+          border-bottom: 10px solid #0070ee;
+          border-left: 10px solid transparent;
+        }
+        .message-text {
+          margin: 0;
+          word-wrap: break-word;
+        }
+      }
+      .received-message {
+        display: flex;
+        flex-direction: column;
+        max-width: 48%;
+        align-self: flex-start;
+        margin: 2px 8px;
+        background-color: #f3f3f3;
+        color: #333;
+        word-wrap: break-word;
+
+        ::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: -5px;
+          border-bottom: 10px solid #0070ee;
+          border-left: 10px solid transparent;
+        }
+        .message-text {
+          margin: 0;
+          word-wrap: break-word;
+        }
+      }
+
+      // .sent-message {
+      //   /* Background color for your messages */
+      //   /* Text color for your messages */
+      //   border-radius: 10px;
+      //   // padding: 8px 12px;
+      //   /* Adjust as needed */
+      //   // word-wrap: break-word;
+      // }
+    }
+  }
+
+  .chat-footer {
+    // border: 1px solid red;ß
+    margin-top: 15px;
+    padding: 10px;
+    .message-input {
+      display: flex;
+      align-items: center;
+
+      input {
+        flex-grow: 1;
+        padding: 7px 10px;
+        background-color: #f3f3f3;
+        // border: 1px solid #ccc;
+        border-radius: 15px;
+        margin-right: 8px;
+        font-size: 14px;
+      }
+    }
+    .message-button {
+      background-color: #0070ee !important;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      cursor: pointer;
+
+      :hover {
+        transform: scale(0.95);
+      }
+
+      :active {
+        transform: scale(0.95);
+      }
+    }
   }
 }
 
-/* Style for the pen icon */
-// .pen-icon {
-//   cursor: pointer;
-//   img {
-//     width: 24px;
-//     height: 24px;
+// .chat-window {
+//   padding: 5px;
+//   //   border: 1px solid green;
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh; /* Set the ChatWindow to take the full height of the screen *
+
+// /* Style for the chat header */
+//   .chat-header {
+//     padding: 11px;
+//     display: flex;
+//     align-items: center;
+//     background-color: #f3f2f7;
+//     .profile-pic {
+//       img {
+//         width: 40px;
+//         height: 40px;
+//         border-radius: 50%;
+//         margin-right: 12px;
+//       }
+//     }
+//     .chat-name {
+//       font-weight: bold;
+//     }
 //   }
 // }
-/* Style for sent messages (your messages) */
-.sent-message {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 8px 5px;
-  // background-color: #0070ee;
-}
+// /*Style for the chat messages container */
+// .chat-messages-container {
+//   display: flex;
+//   overflow-y: auto; /* Enable vertical scrolling */
+//   //   border: 1px solid red;
+// }
 
-.sent-message .message-sender {
-  display: none; /* Hide sender's name for your messages */
-}
+// /* Style for the chat messages container */
+// .chat-messages {
+//   flex-grow: 1; /* Allow the chat messages area to expand and take remaining height */
+//   display: flex;
+//   overflow-y: auto; /* Enable vertical scrolling */
+//   //   border: 1px solid red;
+// }
 
-.sent-message .message-text {
-  /* Background color for your messages */
-  color: white; /* Text color for your messages */
-  border-radius: 10px;
-  padding: 8px 12px;
-  max-width: 70%; /* Adjust as needed */
-  word-wrap: break-word;
-}
+// /* Style for individual chat messages */
+// .message {
+//   margin-bottom: 16px;
+//   padding: 12px;
+//   border-radius: 4px;
+//   color: white;
 
-.sent-message .message-timestamp {
-  font-size: 12px;
-  color: #888;
-}
+//   .message-sender {
+//     font-weight: bold;
+//   }
 
-/* Style for received messages (sender's messages) */
-.received-message {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 8px 0;
-}
+// /* Style for the message input section */
 
-.received-message .message-sender {
-  font-weight: bold; /* Display sender's name in bold for received messages */
-  margin-bottom: 4px;
-}
+// /* Style for sent messages (your messages) */
 
-.received-message .message-text {
-  background-color: #f3f3f3; /* Background color for received messages */
-  color: #333; /* Text color for received messages */
-  border-radius: 10px;
-  padding: 8px 12px;
-  max-width: 70%; /* Adjust as needed */
-  word-wrap: break-word;
-}
+// .sent-message .message-sender {
+//   display: none; /* Hide sender's name for your messages */
+// }
 
-.received-message .message-timestamp {
-  font-size: 12px;
-  color: #888;
-}
+// .sent-message .message-timestamp {
+//   font-size: 12px;
+//   color: #888;
+// }
+
+// /* Style for received messages (sender's messages) */
+
+// .received-message .message-sender {
+//   font-weight: bold; /* Display sender's name in bold for received messages */
+//   margin-bottom: 4px;
+// }
+
+// .received-message .message-text {
+//   background-color: #f3f3f3; /* Background color for received messages */
+//   color: #333; /* Text color for received messages */
+//   border-radius: 10px;
+//   padding: 8px 12px;
+//   max-width: 70%; /* Adjust as needed */
+//   word-wrap: break-word;
+// }
+
+// .received-message .message-timestamp {
+//   font-size: 12px;
+//   color: #888;
+// }

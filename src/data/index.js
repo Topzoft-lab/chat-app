@@ -7,7 +7,10 @@ export const useDataContext = () => useContext(DataContext);
 
 const DataProvider = ({ children }) => {
   const [isSignup, setSignUp] = useState(false);
+  const [isRegister, setRegister] = useState(false);
   const [isLogin, setLogin] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [phone, setPhone] = useState("");
   const [chatLists, setChatList] = useState(false);
   const [isMessageSent, setIsMessageSent] = useState(false);
 
@@ -16,17 +19,25 @@ const DataProvider = ({ children }) => {
 
   // Example: Redirect to /login when isSignup changes
   React.useEffect(() => {
+    console.log("i am here o", isSignup);
     if (isSignup) {
-      navigate("/login");
+      navigate("/signup");
     }
   }, [isSignup]);
+
+  React.useEffect(() => {
+    console.log("i am here o", isRegister);
+    if (isRegister) {
+      navigate("/login");
+    }
+  }, [isRegister]);
 
   // Example: Redirect to /main when isLogin changes
   React.useEffect(() => {
     const fetchData = async () => {
       if (isLogin) {
         let result = await window.api.getConversation();
-        console.log(result);
+        // console.log(result);
         setChatList(result);
         navigate("/main");
       }
@@ -38,7 +49,7 @@ const DataProvider = ({ children }) => {
     const fetchData = async () => {
       if (isMessageSent) {
         let result = await window.api.getConversation();
-        console.log(result, "newData");
+        // console.log(result, "newData");
         setChatList(result);
         // navigate("/main");
       }
@@ -47,6 +58,9 @@ const DataProvider = ({ children }) => {
   }, [isMessageSent]);
 
   React.useEffect(() => {}, []);
+  const registerPhone = (phonenumber) => {
+    setPhone(phonenumber);
+  };
 
   const sendMessage = async (text) => {
     console.log("here now, hit", chatLists);
@@ -61,7 +75,7 @@ const DataProvider = ({ children }) => {
     setChatList(result);
   };
 
-  const value = { isSignup, isLogin, setSignUp, setLogin, sendMessage, chatLists };
+  const value = { isSignup, isLogin, setSignUp, setLogin, sendMessage, chatLists, phone, registerPhone, setRegister, otp, setOtp };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

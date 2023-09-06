@@ -5,7 +5,7 @@ import { useDataContext } from "../../../data";
 const Login = () => {
   const [code, setCode] = useState("");
   const [enabled, setEnabled] = useState(false);
-  const { setLogin } = useDataContext();
+  const { setSignUp, phone, otp } = useDataContext();
 
   const handleChange = async (e) => {
     const { name, value } = e.target;
@@ -21,15 +21,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLogin(true);
+    setSignUp(true);
   };
 
   return (
     <div className="login-container">
       <img src="src/assets/logo/logo.png" alt="Logo" className="logo" />
-      <label className="label">+1 31-481-4739</label>
+      <label className="label">+1 {phone}</label>
 
-      <p className="p-label">We have sent you an sms with the code</p>
+      <p className="p-label">We have sent you an sms with the code {otp}</p>
 
       <form onSubmit={handleSubmit}>
         <div className="input-group">

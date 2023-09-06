@@ -4,14 +4,17 @@ const store = new Store();
 const { v4: uuidv4 } = require("uuid");
 
 // function to save to store
-const setStore = (name, lastname) => {
+const setStore = (args, action = "register") => {
   // Create an instance of electron-store
-  let otp = generateOTP();
-  store.set("userProfile", { name: name, lastName: lastname, otp });
-
-  // To retrieve user profile data:
-  const userProfile = store.get("userProfile");
-  return userProfile ? userProfile.otp : false;
+  if (action === "register") {
+    let otp = generateOTP();
+    store.set("userProfile", { ...args, otp });
+    // To retrieve user profile data:
+    const userProfile = store.get("userProfile");
+    return userProfile ? userProfile.otp : false;
+  }
+  store.set("userProfile", { ...args });
+  return true;
 };
 
 //function to generate random numbers
@@ -35,7 +38,20 @@ const compareCode = (code) => {
 const generateUserConversation = () => {
   // Generate a UUID
   const uuid = uuidv4();
-  store.set("conversations", [{ id: uuid, name: "Darryl", photo_id: 1, lastMessage: "", lastSeen: formatAMPM(new Date()), conversations: [] }]);
+  store.set("conversations", [
+    {
+      id: uuid,
+      name: "Darryl",
+      photo_id: 1,
+      lastMessage: "but I think mostly they targeting parents coos my friend's mother got scammed 20k",
+      lastSeen: formatAMPM(new Date()),
+      conversations: [
+        { id: 1, text: "I saw the most recent scam is the ads on Facebook selling seafood at a cheap price", sender: "you", timestamp: "2:56 PM" },
+
+        { id: 2, text: "but I think mostly they targeting parents coos my friend's mother got scammed 20k", sender: "Darryl", timestamp: "2:57 PM" },
+      ],
+    },
+  ]);
 };
 
 const saveMessage = (id, message) => {
@@ -45,7 +61,8 @@ const saveMessage = (id, message) => {
     conv.lastMessage = message.text;
     conv.lastSeen = formatAMPM(new Date());
   }
-  conv.conversations.push(message);
+
+  conv.conversations.push({ ...message, timestamp: formatAMPM(new Date()) });
   console.log({ conv });
   store.set("conversations", conversations);
   return conversations;
