@@ -1,11 +1,15 @@
 /* Assuming you have a class called .footer and .pen-icon for the styling */
 
 /* Set the height of the parent container to 100vh */
+
 html,
 body {
   height: 100%;
   // border: 1px solid red;
   margin: 0;
+  body {
+    font-family: "Roboto", sans-serif;
+  }
 }
 
 .footer {

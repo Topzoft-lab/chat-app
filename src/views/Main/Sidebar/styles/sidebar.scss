@@ -53,6 +53,10 @@
 
         .last-message {
           font-size: 12px;
+          width: 300px;
+          white-space: nowrap; /* Prevents text from wrapping to the next line */
+          overflow: hidden; /* Hides any text that overflows the element's bounds */
+          text-overflow: ellipsis;
         }
       }
     }
