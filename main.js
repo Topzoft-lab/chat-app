@@ -1,6 +1,51 @@
 const { BrowserWindow, app, ipcMain, Notification } = require("electron");
+const {  autoUpdater } = require('electron-updater');
 const path = require("path");
 require("./main/ipc");
+
+
+app.whenReady().then(createWindow);
+
+
+// Set the URL for your app's update server
+autoUpdater.setFeedURL({
+  provider: 'github',
+  repo: 'https://github.com/Topzoft-lab/chat-app',
+  owner: 'topzoft-lab',
+});
+
+
+
+autoUpdater.on('update-available', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Available',
+    message: 'A new version of the app is available. Do you want to update now?',
+    buttons: ['Update', 'No']
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate();
+    }
+  });
+});
+
+autoUpdater.on('update-downloaded', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Ready',
+    message: 'Install and restart now?',
+    buttons: ['Yes', 'Later']
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.quitAndInstall(false, true);
+    }
+  });
+});
+
+autoUpdater.on('error', (error) => {
+  dialog.showErrorBox('Error: ', error === null ? "unknown" : app.getVersion() + "This is my version" + (error.stack || error).toString());
+});
+// Your Electron app code...
 
 const isDev = !app.isPackaged;
 
@@ -18,6 +63,8 @@ function createWindow() {
   });
 
   win.loadFile("index.html");
+  // Check for updates and notify the user
+autoUpdater.checkForUpdatesAndNotify();
 }
 
 if (isDev) {
@@ -30,4 +77,3 @@ ipcMain.on("notify", (_, message) => {
   new Notification({ title: "Notifiation", body: message }).show();
 });
 
-app.whenReady().then(createWindow);

@@ -4,16 +4,62 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --config webpack.common.js --watch",
-    "start": "electron ."
+    "start-dev": "webpack --config webpack.dev.js --watch",
+    "start-electron": "electron .",
+    "build-dev": "webpack --config webpack.dev.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "start": "npm-run-all -p start-dev start-electron",
+    "build": "npm-run-all build-dev build-electron",
+    "build-electron": "electron-builder",
+    "publish-electron": "electron-builder --publish always"
+  },
+  "build": {
+    "appId": "com.example.chatapp",
+    "productName": "ChatApp",
+    "files": [
+      "build/**/**",
+      "node_modules/**/**",
+      "main/**/**",
+      "package.json",
+      "main.js",
+      "index.html"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "tar.gz"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Topzoft-lab/chat-app"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^22.0.0",
     "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.5.0",
@@ -25,11 +71,14 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
+    "electron": "^26.2.0",
+    "electron-builder": "^24.6.4",
     "electron-reload": "^1.5.0",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.9.0"
   }
 }
